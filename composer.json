@@ -1,12 +1,11 @@
 {
-  "name": "glushkovds/phpclickhouse-laravel",
-  "description": "Adapter of the most popular library https://github.com/smi2/phpClickHouse to Laravel",
+  "name": "xden/phpclickhouse-laravel",
+  "description": "Forked https://github.com/smi2/phpClickHouse",
   "keywords": [
     "php",
     "laravel",
     "clickhouse"
   ],
-  "homepage": "https://github.com/glushkovds/phpClickHouse-laravel",
   "type": "library",
   "license": "MIT",
   "authors": [
