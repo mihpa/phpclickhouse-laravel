@@ -74,6 +74,7 @@ class Connection extends BaseConnection
     /** @inheritDoc */
     public function select($query, $bindings = [], $useReadPdo = true): array
     {
+        $query = QueryGrammar::prepareParameters($query);
         $query = QueryGrammar::sortParameters($query, $bindings);
 
         return $this->client->select($query, $bindings)->rows();

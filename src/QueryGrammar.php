@@ -10,15 +10,13 @@ use Illuminate\Database\Query\Grammars\Grammar;
 class QueryGrammar extends Grammar
 {
     const PARAMETER_SIGN = '#@?';
-    public static $lastParamIndex = 0;
 
     /** @inheritDoc */
     public function parameterize(array $values): string
     {
         $params = [];
-
         for ($i = 0; $i < count($values); $i++) {
-            $params[] = ':' . self::$lastParamIndex++;
+            $params[] = ":$i";
         }
 
         return implode(', ', $params);
@@ -43,9 +41,10 @@ class QueryGrammar extends Grammar
      */
     public static function prepareParameters(string $sql): string
     {
+        $parameterNum = 0;
         while (($pos = strpos($sql, QueryGrammar::PARAMETER_SIGN)) !== false) {
-            $sql = substr_replace($sql, ":" . self::$lastParamIndex, $pos, strlen(QueryGrammar::PARAMETER_SIGN));
-            self::$lastParamIndex++;
+            $sql = substr_replace($sql, ":$parameterNum", $pos, strlen(QueryGrammar::PARAMETER_SIGN));
+            $parameterNum++;
         }
 
         return $sql;
